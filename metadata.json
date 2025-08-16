@@ -1,0 +1,5 @@
+{
+  "name": "TTRPG Character Generator",
+  "description": "Generate detailed characters and NPCs for various tabletop roleplaying games like Dungeons & Dragons 5e, Pathfinder 2e, and Blades in the Dark using AI. Provide a concept and get a complete character sheet in seconds.",
+  "requestFramePermissions": []
+}
