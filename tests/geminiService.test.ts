@@ -1,8 +1,8 @@
 // Test for Gemini service
 process.env.API_KEY = 'test-api-key';
 
-import { generateCharacter } from '../services/geminiService';
-import { GameSystem } from '../types';
+import { generateCharacter } from '../src/lib/services/geminiService';
+import { GameSystem } from '../src/types';
 
 describe('Gemini Service', () => {
   beforeEach(() => {

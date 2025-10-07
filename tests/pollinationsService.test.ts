@@ -1,5 +1,5 @@
 // Test for Pollinations service
-import { PollinationsService } from '../services/pollinationsService';
+import { PollinationsService } from '../src/lib/services/pollinationsService';
 
 describe('PollinationsService', () => {
   beforeEach(() => {

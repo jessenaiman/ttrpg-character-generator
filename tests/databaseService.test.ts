@@ -1,8 +1,8 @@
 // Test for Database service
-import { DatabaseService } from '../services/databaseService';
+import { DatabaseService } from '../src/lib/services/databaseService';
 
 // Mock the database
-jest.mock('../database', () => {
+jest.mock('../src/lib/db/index', () => {
   const mockCharacters = {
     toArray: jest.fn(),
     orderBy: jest.fn().mockReturnThis(),
@@ -41,10 +41,10 @@ describe('DatabaseService', () => {
         isNpc: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
     ];
     
-    const { db } = require('../database');
+    const { db } = require('../src/lib/db/index');
     db.characters.toArray.mockResolvedValue(mockStoredCharacters);
 
     const result = await DatabaseService.getAllCharacters();
@@ -66,11 +66,11 @@ describe('DatabaseService', () => {
       updatedAt: new Date(),
     };
     
-    const { db } = require('../database');
+    const { db } = require('../src/lib/db/index');
     db.characters.get.mockResolvedValue(mockStoredCharacter);
 
     const result = await DatabaseService.getCharacterById('1');
-    
+
     expect(result).toEqual(mockStoredCharacter);
     expect(db.characters.get).toHaveBeenCalledWith('1');
   });
@@ -90,7 +90,7 @@ describe('DatabaseService', () => {
       updatedAt: new Date(),
     };
     
-    const { db } = require('../database');
+    const { db } = require('../src/lib/db/index');
     db.characters.add.mockResolvedValue(expectedReturn);
 
     const result = await DatabaseService.addCharacter(newCharacterData);
@@ -111,10 +111,10 @@ describe('DatabaseService', () => {
         isNpc: false,
         createdAt: timestamp,
         updatedAt: timestamp,
-      }
+      },
     ];
     
-    const { db } = require('../database');
+    const { db } = require('../src/lib/db/index');
     db.characters.bulkPut.mockResolvedValue(undefined);
 
     await DatabaseService.bulkUpsert(charactersToUpdate);
@@ -128,12 +128,12 @@ describe('DatabaseService', () => {
         isNpc: false,
         createdAt: expect.any(Date),
         updatedAt: expect.any(Date), // Updated with current timestamp
-      }
+      },
     ]);
   });
 
   test('should call deleteCharacter and remove a character', async () => {
-    const { db } = require('../database');
+    const { db } = require('../src/lib/db/index');
     db.characters.delete.mockResolvedValue(1);
 
     await DatabaseService.deleteCharacter('1');
@@ -142,7 +142,7 @@ describe('DatabaseService', () => {
   });
 
   test('should call getCharacterCount and return the count', async () => {
-    const { db } = require('../database');
+    const { db } = require('../src/lib/db/index');
     db.characters.count.mockResolvedValue(5);
 
     const result = await DatabaseService.getCharacterCount();
@@ -161,10 +161,10 @@ describe('DatabaseService', () => {
         isNpc: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
     ];
     
-    const { db } = require('../database');
+    const { db } = require('../src/lib/db/index');
     db.characters.toArray.mockResolvedValue(mockStoredCharacters);
 
     const result = await DatabaseService.searchCharacters('brave');

@@ -45,7 +45,7 @@ import { PollinationsService } from '../services/pollinationsService';
  */
 export const generateCharacterWithMedia = async (
   system: GameSystem,
-  prompt: string
+  prompt: string,
 ): Promise<{
   character: Character;
   imageBuffer?: Buffer;
@@ -59,7 +59,7 @@ export const generateCharacterWithMedia = async (
     let imageBuffer: Buffer | undefined;
     try {
       imageBuffer = await PollinationsService.generateCharacterImage(
-        `Portrait of a ${character.name}, ${prompt}`
+        `Portrait of a ${character.name}, ${prompt}`,
       );
     } catch (imageError) {
       console.warn('Failed to generate character image:', imageError);
@@ -70,10 +70,10 @@ export const generateCharacterWithMedia = async (
     let audioData: any | undefined;
     try {
       // Try to generate audio with a simple voice line
-      const voiceLine = "I will protect the innocent.";
+      const voiceLine = 'I will protect the innocent.';
       audioData = await PollinationsService.generateCharacterAudio(
         character,
-        voiceLine
+        voiceLine,
       );
     } catch (audioError) {
       console.warn('Failed to generate character audio:', audioError);
@@ -123,12 +123,12 @@ export const generateCharacterWithMedia = async (
  */
 export const generateCharactersWithImages = async (
   system: GameSystem,
-  prompts: string[]
+  prompts: string[],
 ): Promise<Array<{ character: Character; imageBuffer?: Buffer }>> => {
   try {
     // Generate all characters in parallel
     const characterPromises = prompts.map(prompt =>
-      PollinationsService.generateCharacter(system, prompt)
+      PollinationsService.generateCharacter(system, prompt),
     );
     
     const characters = await Promise.all(characterPromises);
@@ -137,7 +137,7 @@ export const generateCharactersWithImages = async (
     const imagePromises = characters.map(async (character, index) => {
       try {
         const imageBuffer = await PollinationsService.generateCharacterImage(
-          `Portrait of a ${character.name}, ${prompts[index]}`
+          `Portrait of a ${character.name}, ${prompts[index]}`,
         );
         return imageBuffer;
       } catch (imageError) {
@@ -214,7 +214,7 @@ export const getAvailableModels = async (): Promise<{
  * ```
  */
 export const generateCharacterSuggestions = async (
-  system: GameSystem
+  system: GameSystem,
 ): Promise<string[]> => {
   try {
     // Create system-specific prompt
@@ -252,7 +252,7 @@ if (require.main === module) {
   // Example: Generate a D&D character with media
   generateCharacterWithMedia(
     GameSystem.DND5E,
-    'A brave warrior who is afraid of the dark'
+    'A brave warrior who is afraid of the dark',
   )
     .then(result => {
       console.log('Generated character with media:');
@@ -272,7 +272,7 @@ if (require.main === module) {
       'A brave warrior who is afraid of the dark',
       'A cunning tiefling rogue with a heart of gold',
       'A grizzled dwarven cleric who has lost their faith',
-    ]
+    ],
   )
     .then(results => {
       console.log('Generated characters with images:');

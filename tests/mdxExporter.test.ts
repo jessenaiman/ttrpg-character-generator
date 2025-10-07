@@ -3,7 +3,7 @@
  */
 
 // Test for MDX Exporter service focusing on UI elements
-import { exportCharacterAsMdx } from '../services/mdxExporter';
+import { exportCharacterAsMdx } from '../src/lib/services/mdxExporter';
 
 describe('MDX Exporter Service', () => {
   // Mock DOM APIs before each test

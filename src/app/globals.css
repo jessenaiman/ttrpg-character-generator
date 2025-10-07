@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* Custom theme configuration for TTRPG Character Generator */
+@theme {
+  --font-family-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* TTRPG Theme Colors */
+  --color-primary: #8B5CF6;      /* Purple for mystical feel */
+  --color-secondary: #F59E0B;    /* Gold for fantasy */
+  --color-accent: #EF4444;       /* Red for combat/danger */
+  --color-success: #10B981;      /* Green for success */
+  --color-background: #0F172A;   /* Dark blue-slate */
+  --color-surface: #1E293B;      /* Lighter slate */
+  --color-text: #F1F5F9;         /* Light text */
+  --color-text-muted: #94A3B8;   /* Muted text */
+
+  /* Game System Colors */
+  --color-dnd: #58180D;          /* D&D brown */
+  --color-pf2e: #7C2D12;         /* Pathfinder orange */
+  --color-blades: #1E3A8A;       /* Blades navy */
+}
+
+/* Base styles */
+* {
+  border-color: rgb(from var(--color-surface) r g b / 0.5);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family-sans);
+}
+
+/* Custom component classes */
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-medium
+           hover:bg-primary/90 transition-colors shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white px-6 py-3 rounded-lg font-medium
+           hover:bg-secondary/90 transition-colors shadow-lg;
+  }
+
+  .card {
+    @apply bg-surface/50 backdrop-blur-sm border border-surface/20
+           rounded-lg p-6 shadow-xl;
+  }
+
+  .character-card {
+    @apply card hover:bg-surface/70 transition-all duration-300
+           hover:scale-105 hover:shadow-2xl;
+  }
+
+  .stat-block {
+    @apply flex items-center justify-between p-3 bg-surface/30
+           rounded border-l-4 border-primary;
+  }
+}
+
+/* Utility classes for TTRPG theming */
+@layer utilities {
+  .game-system-dnd {
+    border-left-color: var(--color-dnd);
+  }
+
+  .game-system-pf2e {
+    border-left-color: var(--color-pf2e);
+  }
+
+  .game-system-blades {
+    border-left-color: var(--color-blades);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

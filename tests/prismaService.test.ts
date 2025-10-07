@@ -21,8 +21,8 @@ jest.mock('@prisma/client', () => {
   };
 });
 
-import { PrismaService } from '../services/prismaService';
-import { GameSystem } from '../types';
+import { PrismaService } from '../src/lib/services/prismaService';
+import { GameSystem } from '../src/types';
 
 describe('PrismaService', () => {
   beforeEach(() => {
@@ -66,7 +66,7 @@ describe('PrismaService', () => {
         isNpc: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
     ];
     
     mockCharacter.findMany.mockResolvedValue(mockCharacters);
@@ -114,7 +114,7 @@ describe('PrismaService', () => {
         isNpc: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
     ];
     
     mockCharacter.findMany.mockResolvedValue(mockCharacters);
@@ -142,7 +142,7 @@ describe('PrismaService', () => {
         isNpc: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
     ];
     
     mockCharacter.findMany.mockResolvedValue(mockCharacters);
@@ -273,7 +273,7 @@ describe('PrismaService', () => {
         isNpc: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
     ];
     
     mockCharacter.findMany.mockResolvedValue(mockCharacters);
@@ -314,7 +314,7 @@ describe('PrismaService', () => {
         isNpc: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
     ];
     
     const startDate = new Date('2023-01-01');

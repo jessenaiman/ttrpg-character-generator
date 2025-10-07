@@ -3,9 +3,9 @@ import {
   generateCharacterWithImage, 
   generateCharactersWithImages, 
   getAvailableModels, 
-  generateCharacterSuggestions 
+  generateCharacterSuggestions, 
 } from '../examples/pollinations-integration';
-import { GameSystem } from '../types';
+import { GameSystem } from '../src/types';
 
 // Mock the Pollinations client
 jest.mock('pollinations', () => {
@@ -95,7 +95,7 @@ describe('Pollinations Integration Example', () => {
 
     const result = await generateCharacterWithImage(
       GameSystem.DND5E,
-      'A brave warrior who is afraid of the dark'
+      'A brave warrior who is afraid of the dark',
     );
     
     expect(result).toEqual({
@@ -251,7 +251,7 @@ describe('Pollinations Integration Example', () => {
     "level2": "Gut shot",
     "level1": ""
   }
-}`
+}`,
     ];
 
     const mockImageBuffers = [
@@ -277,7 +277,7 @@ describe('Pollinations Integration Example', () => {
         'A brave warrior who is afraid of the dark',
         'A cunning tiefling rogue with a heart of gold',
         'A grizzled dwarven cleric who has lost their faith',
-      ]
+      ],
     );
     
     expect(result).toHaveLength(3);
@@ -353,8 +353,8 @@ describe('Pollinations Integration Example', () => {
     await expect(
       generateCharacterWithImage(
         GameSystem.DND5E,
-        'A brave warrior who is afraid of the dark'
-      )
+        'A brave warrior who is afraid of the dark',
+      ),
     ).rejects.toThrow('Failed to generate character with Pollinations API.');
     
     expect(console.error).toHaveBeenCalledWith('Failed to generate character with Pollinations:', expect.any(Error));
@@ -374,8 +374,8 @@ describe('Pollinations Integration Example', () => {
     await expect(
       generateCharactersWithImages(
         GameSystem.DND5E,
-        ['A brave warrior who is afraid of the dark']
-      )
+        ['A brave warrior who is afraid of the dark'],
+      ),
     ).rejects.toThrow('Failed to generate characters with Pollinations API.');
     
     expect(console.error).toHaveBeenCalledWith('Failed to generate characters with images:', expect.any(Error));
@@ -426,8 +426,8 @@ describe('Pollinations Integration Example', () => {
     await expect(
       generateCharacterWithImage(
         GameSystem.DND5E,
-        'A brave warrior who is afraid of the dark'
-      )
+        'A brave warrior who is afraid of the dark',
+      ),
     ).rejects.toThrow('Received an invalid format from the API.');
     
     expect(console.error).toHaveBeenCalledWith('Failed to parse JSON response:', mockResponse, expect.any(Error));
@@ -484,7 +484,7 @@ describe('Pollinations Integration Example', () => {
 
     const result = await generateCharacterWithImage(
       GameSystem.DND5E,
-      'A brave warrior who is afraid of the dark'
+      'A brave warrior who is afraid of the dark',
     );
     
     // Should still return character data even if image generation fails

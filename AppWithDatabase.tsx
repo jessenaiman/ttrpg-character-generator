@@ -54,7 +54,7 @@ const App: React.FC = () => {
 
   const handleGenerate = useCallback(async (prompt: string) => {
     if (!prompt) {
-      setError("Please enter a character concept.");
+      setError('Please enter a character concept.');
       return;
     }
     
@@ -78,7 +78,7 @@ const App: React.FC = () => {
       setSelectedCharacter(newCharacter); // Automatically view the newly generated character
     } catch (err) {
       console.error(err);
-      setError("Failed to generate character. The model might be busy or returned an unexpected format. Please try again.");
+      setError('Failed to generate character. The model might be busy or returned an unexpected format. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -115,7 +115,7 @@ const App: React.FC = () => {
       setCharacters(prev => [newNpc, ...prev]);
     } catch (err) {
       console.error(err);
-      setError("Failed to generate NPC. The model might be busy or returned an unexpected format. Please try again.");
+      setError('Failed to generate NPC. The model might be busy or returned an unexpected format. Please try again.');
     } finally {
       setIsLoading(false);
     }

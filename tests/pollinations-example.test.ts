@@ -3,9 +3,9 @@ import {
   generateCharacterWithMedia, 
   generateCharactersWithImages, 
   getAvailableModels, 
-  generateCharacterSuggestions 
+  generateCharacterSuggestions, 
 } from '../examples/pollinations-example';
-import { GameSystem } from '../types';
+import { GameSystem } from '../src/types';
 
 // Mock the Pollinations service
 jest.mock('../services/pollinationsService', () => {
@@ -83,7 +83,7 @@ describe('Pollinations Example Usage', () => {
 
     const result = await generateCharacterWithMedia(
       GameSystem.DND5E,
-      'A brave warrior who is afraid of the dark'
+      'A brave warrior who is afraid of the dark',
     );
     
     expect(result).toEqual({
@@ -93,14 +93,14 @@ describe('Pollinations Example Usage', () => {
     });
     expect(PollinationsService.generateCharacter).toHaveBeenCalledWith(
       GameSystem.DND5E,
-      'A brave warrior who is afraid of the dark'
+      'A brave warrior who is afraid of the dark',
     );
     expect(PollinationsService.generateCharacterImage).toHaveBeenCalledWith(
-      `Portrait of a ${mockCharacter.name}, A brave warrior who is afraid of the dark`
+      `Portrait of a ${mockCharacter.name}, A brave warrior who is afraid of the dark`,
     );
     expect(PollinationsService.generateCharacterAudio).toHaveBeenCalledWith(
       mockCharacter,
-      'I will protect the innocent.'
+      'I will protect the innocent.',
     );
   });
 
@@ -191,7 +191,7 @@ describe('Pollinations Example Usage', () => {
       [
         'A brave warrior who is afraid of the dark',
         'A cunning tiefling rogue with a heart of gold',
-      ]
+      ],
     );
     
     expect(result).toEqual([
@@ -208,11 +208,11 @@ describe('Pollinations Example Usage', () => {
     expect(PollinationsService.generateCharacterImage).toHaveBeenCalledTimes(2);
     expect(PollinationsService.generateCharacter).toHaveBeenCalledWith(
       GameSystem.DND5E,
-      'A brave warrior who is afraid of the dark'
+      'A brave warrior who is afraid of the dark',
     );
     expect(PollinationsService.generateCharacter).toHaveBeenCalledWith(
       GameSystem.DND5E,
-      'A cunning tiefling rogue with a heart of gold'
+      'A cunning tiefling rogue with a heart of gold',
     );
   });
 
@@ -269,17 +269,17 @@ describe('Pollinations Example Usage', () => {
     await expect(
       generateCharacterWithMedia(
         GameSystem.DND5E,
-        'A brave warrior who is afraid of the dark'
-      )
+        'A brave warrior who is afraid of the dark',
+      ),
     ).rejects.toThrow('Failed to generate character with Pollinations API.');
     
     expect(console.error).toHaveBeenCalledWith(
       'Failed to generate character with media:',
-      expect.any(Error)
+      expect.any(Error),
     );
     expect(PollinationsService.generateCharacter).toHaveBeenCalledWith(
       GameSystem.DND5E,
-      'A brave warrior who is afraid of the dark'
+      'A brave warrior who is afraid of the dark',
     );
   });
 
@@ -291,17 +291,17 @@ describe('Pollinations Example Usage', () => {
     await expect(
       generateCharactersWithImages(
         GameSystem.DND5E,
-        ['A brave warrior who is afraid of the dark']
-      )
+        ['A brave warrior who is afraid of the dark'],
+      ),
     ).rejects.toThrow('Failed to generate characters with Pollinations API.');
     
     expect(console.error).toHaveBeenCalledWith(
       'Failed to generate characters with images:',
-      expect.any(Error)
+      expect.any(Error),
     );
     expect(PollinationsService.generateCharacter).toHaveBeenCalledWith(
       GameSystem.DND5E,
-      'A brave warrior who is afraid of the dark'
+      'A brave warrior who is afraid of the dark',
     );
   });
 
@@ -311,12 +311,12 @@ describe('Pollinations Example Usage', () => {
     PollinationsService.getImageModels.mockRejectedValue(new Error('API Error'));
 
     await expect(getAvailableModels()).rejects.toThrow(
-      'Failed to get available models from Pollinations API.'
+      'Failed to get available models from Pollinations API.',
     );
     
     expect(console.error).toHaveBeenCalledWith(
       'Failed to get available models:',
-      expect.any(Error)
+      expect.any(Error),
     );
     expect(PollinationsService.getImageModels).toHaveBeenCalled();
   });
@@ -327,12 +327,12 @@ describe('Pollinations Example Usage', () => {
     PollinationsService.generateTextGet.mockRejectedValue(new Error('API Error'));
 
     await expect(generateCharacterSuggestions(GameSystem.DND5E)).rejects.toThrow(
-      'Failed to generate character suggestions with Pollinations API.'
+      'Failed to generate character suggestions with Pollinations API.',
     );
     
     expect(console.error).toHaveBeenCalledWith(
       'Failed to generate character suggestions:',
-      expect.any(Error)
+      expect.any(Error),
     );
     expect(PollinationsService.generateTextGet).toHaveBeenCalledWith({
       prompt: expect.stringContaining('Dungeons & Dragons 5th Edition'),

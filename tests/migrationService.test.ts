@@ -7,8 +7,8 @@ import {
   resetDatabase, 
   backupDatabase, 
   restoreDatabase, 
-  validateDatabase 
-} from '../services/migrationService';
+  validateDatabase, 
+} from '../src/lib/services/migrationService';
 
 describe('Migration Service', () => {
   beforeEach(() => {
