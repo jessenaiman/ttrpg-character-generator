@@ -1,12 +1,13 @@
-
 import React from 'react';
-import { StoredCharacter, GameSystem, DndCharacter, Pf2eCharacter, BladesCharacter, Character } from '../types';
+import { LocalStoredCharacter as StoredCharacter, GameSystem, DndCharacter, Pf2eCharacter, BladesCharacter, Character } from '../types';
 import { GAME_SYSTEMS } from '../constants';
 
 interface CharacterListProps {
   characters: StoredCharacter[];
   onSelect: (character: StoredCharacter) => void;
   onDelete: (id: string) => void;
+  onGenerateNpc: (character: StoredCharacter) => void;
+  isLoading: boolean;
 }
 
 const getCharacterSummary = (character: StoredCharacter): string => {
@@ -29,15 +30,16 @@ const getCharacterName = (character: Character): string => {
     return (character as DndCharacter).name || 'Unnamed';
 }
 
-const CharacterList: React.FC<CharacterListProps> = ({ characters, onSelect, onDelete }) => {
+const CharacterList: React.FC<CharacterListProps> = ({ characters, onSelect, onDelete, onGenerateNpc, isLoading }) => {
   return (
     <div className="bg-gray-800/50 p-2 sm:p-4 rounded-lg border border-gray-700 shadow-lg">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[400px] text-left table-auto">
+        <table className="w-full min-w-[500px] text-left table-auto">
           <thead className="border-b-2 border-amber-800/50">
             <tr>
               <th className="p-3 text-sm font-title uppercase text-amber-400 tracking-wider">Name</th>
               <th className="p-3 text-sm font-title uppercase text-amber-400 tracking-wider hidden sm:table-cell">System</th>
+              <th className="p-3 text-sm font-title uppercase text-amber-400 tracking-wider hidden md:table-cell">Role</th>
               <th className="p-3 text-sm font-title uppercase text-amber-400 tracking-wider hidden md:table-cell">Summary</th>
               <th className="p-3 text-sm font-title uppercase text-amber-400 tracking-wider text-right">Actions</th>
             </tr>
@@ -64,9 +66,27 @@ const CharacterList: React.FC<CharacterListProps> = ({ characters, onSelect, onD
                     className="p-3 text-gray-400 hidden md:table-cell cursor-pointer"
                     onClick={() => onSelect(char)}
                 >
+                    {char.isNpc ? 'NPC' : 'Character'}
+                </td>
+                <td 
+                    className="p-3 text-gray-400 hidden md:table-cell cursor-pointer"
+                    onClick={() => onSelect(char)}
+                >
                     {getCharacterSummary(char)}
                 </td>
-                <td className="p-3 text-right">
+                <td className="p-3 text-right space-x-1 sm:space-x-2">
+                  <button
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onGenerateNpc(char);
+                    }}
+                    disabled={isLoading || char.isNpc}
+                    className="text-amber-400 hover:text-amber-300 font-semibold transition-colors text-sm py-1 px-2 rounded disabled:text-gray-600 disabled:cursor-not-allowed disabled:hover:text-gray-600"
+                    aria-label={`Generate NPC related to ${getCharacterName(char.character)}`}
+                    title="Generate a related NPC"
+                  >
+                    Gen NPC
+                  </button>
                   <button 
                     onClick={(e) => {
                       e.stopPropagation();

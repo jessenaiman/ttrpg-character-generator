@@ -38,8 +38,6 @@ const BladesSheet: React.FC<BladesSheetProps> = ({ character: char }) => (
                 <p className="text-sm"><strong className="text-gray-400 print-text-black">Background:</strong> {char.background}</p>
                 <p className="text-sm"><strong className="text-gray-400 print-text-black">Vice:</strong> {char.vice} ({char.purveyor})</p>
                 <p className="text-sm"><strong className="text-gray-400 print-text-black">Aliases:</strong> {char.aliases.join(', ')}</p>
-                <h4 className="font-bold text-gray-400 mt-4 mb-2 print-text-black">Look</h4>
-                <p className="text-gray-300 text-sm leading-relaxed print-text-black">{char.look}</p>
             </SheetSection>
             
             <SheetSection title="Action Ratings" className="md:col-span-2">
@@ -48,6 +46,12 @@ const BladesSheet: React.FC<BladesSheetProps> = ({ character: char }) => (
                         <p key={action} className="mb-1"><strong className="text-gray-400 print-text-black">{action}:</strong> {'●'.repeat(rating)}{'○'.repeat(4-rating)}</p>
                     ))}
                 </div>
+            </SheetSection>
+
+            <SheetSection title="Appearance" className="md:col-span-3">
+                <ul className="space-y-2 text-sm">
+                    {char.appearance.map((item, i) => <IconListItem key={i} icon={<ScrollIcon />}>{item}</IconListItem>)}
+                </ul>
             </SheetSection>
 
             <SheetSection title="Drives" className="md:col-span-3">

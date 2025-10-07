@@ -1,0 +1,11 @@
+# Ask Mode Rules (Non-Obvious Only)
+- Project mixes VSCode extension code in src/ with webview UI (counterintuitive structure)
+- DatabaseService.ts provides comprehensive abstraction over Dexie.js implementation
+- PollinationsService.ts contains detailed API integration examples and error handling
+- Character types defined in types.ts show exact structure for all three game systems
+- Migration logic in database.ts handles localStorage to IndexedDB transition automatically
+- Service layer pattern established with static methods and comprehensive JSDoc comments
+- Package.json scripts include specific database management commands (db:push, db:migrate, db:studio)
+- Configuration files show exact ESLint and Prettier rules enforced in the project
+- Test setup runs from multiple directories with specific coverage requirements
+- Implementation documentation in various .md files provides context for different approaches tried

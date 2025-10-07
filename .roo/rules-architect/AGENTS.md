@@ -1,0 +1,13 @@
+# Architect Mode Rules (Non-Obvious Only)
+- Service layer architecture separates database concerns from UI components effectively
+- Dexie.js with compound indexes enables efficient querying by system and NPC status
+- Pollinations API integration provides free alternative to paid AI services
+- Character generation uses strict JSON schema validation across three game systems
+- Database migration strategy supports seamless localStorage to IndexedDB transition
+- Static service methods enable consistent API across the application
+- Test organization in multiple directories requires careful dependency management
+- ESLint configuration enforces TypeScript best practices without being overly strict
+- Prisma integration provides schema management separate from runtime database
+- Webview isolation requires specific React patterns and IPC communication
+- Character data structure supports complex nested objects for different game systems
+- Error handling patterns established for API failures and payment requirements

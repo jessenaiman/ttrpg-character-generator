@@ -1,0 +1,11 @@
+# Debug Mode Rules (Non-Obvious Only)
+- Database migration from localStorage to IndexedDB happens automatically on version 2
+- Extension logs only visible in "Extension Host" output channel, not Debug Console
+- Webview dev tools accessed via Command Palette > "Developer: Open Webview Developer Tools"
+- Pollinations API errors logged with specific error codes (402 = payment required)
+- Dexie.js database debugging requires browser dev tools > Application > IndexedDB
+- Character generation failures often due to JSON schema violations (check network tab)
+- Audio generation failures return null silently (no error thrown)
+- Database connection issues resolved by clearing browser storage and refreshing
+- Vite dev server must be running for webview debugging (npm run dev)
+- Prisma database operations require separate terminal for schema management

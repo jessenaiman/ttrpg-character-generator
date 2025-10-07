@@ -1,0 +1,15 @@
+# Code Mode Rules (Non-Obvious Only)
+- Always use safeWriteJson() from src/utils/ instead of JSON.stringify for file writes (prevents corruption)
+- API retry mechanism in src/api/providers/utils/ is mandatory (not optional as it appears)
+- Database queries MUST use the query builder in packages/evals/src/db/queries/ (raw SQL will fail)
+- Provider interface in packages/types/src/ has undocumented required methods
+- Test files must be in same directory as source for vitest to work (not in separate test folder)
+- React hooks required because external state libraries break webview isolation
+- Character generation requires exactly 3-5 bullet points for personality/backstory/appearance arrays
+- DatabaseService static methods must be used instead of direct Dexie.js access
+- Pollinations API calls need specific JSON schema format with system instructions
+- Audio generation handles 402 payment errors by returning null (requires special access/credits)
+- ESLint explicit-function-return-type rule must be followed (warn level)
+- Import statements must use single quotes and trailing commas (prettier enforced)
+- TypeScript no-explicit-any warnings cannot be disabled, must be properly typed
+- Semi-colons are mandatory (eslint rule), console warnings allowed but not errors

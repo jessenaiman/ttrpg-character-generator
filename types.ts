@@ -35,7 +35,7 @@ export interface DndCharacter {
   };
   attacks: Attack[];
   backstory: string[];
-  appearance: string;
+  appearance: string[];
   personality: string[];
   equipment: string[];
 }
@@ -61,7 +61,7 @@ export interface Pf2eCharacter {
   skills: { name: string; rank: string }[];
   attacks: Attack[];
   backstory: string[];
-  appearance: string;
+  appearance: string[];
   personality: string[];
   equipment: string[];
 }
@@ -73,7 +73,7 @@ export interface BladesCharacter {
   background: string;
   vice: string;
   purveyor: string;
-  look: string;
+  appearance: string[];
   aliases: string[];
   attributes: {
     insight: number;
@@ -95,9 +95,10 @@ export interface BladesCharacter {
 export type Character = DndCharacter | Pf2eCharacter | BladesCharacter;
 
 // New type to hold a generated character with its metadata
-export interface StoredCharacter {
+export interface LocalStoredCharacter {
   id: string;
   system: GameSystem;
   prompt: string;
   character: Character;
+  isNpc: boolean;
 }

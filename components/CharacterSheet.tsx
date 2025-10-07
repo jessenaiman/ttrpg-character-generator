@@ -1,9 +1,10 @@
 import React from 'react';
-import { GameSystem, StoredCharacter } from '../types';
+import { GameSystem, LocalStoredCharacter as StoredCharacter } from '../types';
 import SheetLayout from './sheets/SheetLayout';
 import DndSheet from './sheets/DndSheet';
 import Pf2eSheet from './sheets/Pf2eSheet';
 import BladesSheet from './sheets/BladesSheet';
+import CharacterChat from './CharacterChat';
 
 interface CharacterSheetProps {
   storedCharacter: StoredCharacter;
@@ -11,7 +12,7 @@ interface CharacterSheetProps {
 }
 
 const CharacterSheet: React.FC<CharacterSheetProps> = ({ storedCharacter, onBack }) => {
-  const { character, system, id } = storedCharacter;
+  const { character, system } = storedCharacter;
 
   const renderSheet = () => {
     switch (system) {
@@ -27,8 +28,9 @@ const CharacterSheet: React.FC<CharacterSheetProps> = ({ storedCharacter, onBack
   };
 
   return (
-    <SheetLayout character={character} onBack={onBack} characterId={id}>
+    <SheetLayout storedCharacter={storedCharacter} onBack={onBack}>
       {renderSheet()}
+      <CharacterChat storedCharacter={storedCharacter} />
     </SheetLayout>
   );
 };

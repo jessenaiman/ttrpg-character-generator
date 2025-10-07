@@ -1,0 +1,35 @@
+{
+  "name": "Aragorn",
+  "race": "Human",
+  "class": "Fighter",
+  "background": "Soldier",
+  "alignment": "Lawful Good",
+  "hitPoints": 20,
+  "armorClass": 18,
+  "speed": "30 ft",
+  "stats": {
+    "strength": 16,
+    "dexterity": 14,
+    "constitution": 15,
+    "intelligence": 10,
+    "wisdom": 12,
+    "charisma": 13
+  },
+  "skills": ["Athletics", "Survival"],
+  "proficiencies": {
+    "weapons": ["Longsword", "Shield"],
+    "armor": ["Chain Mail"],
+    "tools": ["Smith's tools"]
+  },
+  "attacks": [
+    {
+      "name": "Longsword",
+      "bonus": "+6",
+      "damage": "1d8+3"
+    }
+  ],
+  "backstory": ["Saved a village from bandits", "Travels with a mysterious elf"],
+  "appearance": ["Tall and muscular", "Wears chain mail"],
+  "personality": ["Brave and honorable", "Protects the innocent"],
+  "equipment": ["Longsword", "Shield", "Chain Mail"]
+}

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Character, DndCharacter, Pf2eCharacter, BladesCharacter } from '../../types';
-import { BackArrowIcon, PrintIcon } from '../icons';
+import { Character, DndCharacter, Pf2eCharacter, BladesCharacter, LocalStoredCharacter as StoredCharacter } from '../../types';
+import { BackArrowIcon, PrintIcon, DownloadIcon } from '../icons';
+import { exportCharacterAsMdx } from '../../services/mdxExporter';
 
 interface SheetLayoutProps {
   children: React.ReactNode;
-  character: Character;
+  storedCharacter: StoredCharacter;
   onBack: () => void;
-  characterId: string;
 }
 
 const getCharHeader = (character: Character): { name: string, details: string } => {
@@ -45,17 +45,16 @@ const generateCharacterImagePrompt = (character: Character): string => {
         promptElements.push(`a gritty ${blades.playbook}`);
     }
 
-    if ('appearance' in character && character.appearance) {
-        promptElements.push(character.appearance);
-    } else if ('look' in character && (character as BladesCharacter).look) {
-        promptElements.push((character as BladesCharacter).look);
+    if ('appearance' in character && character.appearance && Array.isArray(character.appearance)) {
+        promptElements.push(character.appearance.join(', '));
     }
 
     return `A fantasy portrait of ${promptElements.join(', ')}. Digital painting, detailed, character concept art, fantasy illustration.`;
 };
 
 
-const SheetLayout: React.FC<SheetLayoutProps> = ({ children, character, onBack, characterId }) => {
+const SheetLayout: React.FC<SheetLayoutProps> = ({ children, storedCharacter, onBack }) => {
+  const { character, id: characterId } = storedCharacter;
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const charHeader = getCharHeader(character);
 
@@ -72,6 +71,10 @@ const SheetLayout: React.FC<SheetLayoutProps> = ({ children, character, onBack, 
     window.print();
   };
 
+  const handleExport = () => {
+    exportCharacterAsMdx(storedCharacter);
+  };
+
   return (
     <div className="bg-gray-800 p-4 sm:p-6 rounded-xl border-2 border-amber-900/50 shadow-2xl animate-fade-in print-container">
         <div className="flex justify-between items-center mb-6 no-print">
@@ -83,14 +86,24 @@ const SheetLayout: React.FC<SheetLayoutProps> = ({ children, character, onBack, 
                 <BackArrowIcon />
                 <span>New/View Characters</span>
             </button>
-            <button 
-                onClick={handlePrint}
-                className="font-title bg-gray-700 text-amber-300 py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors duration-300 flex items-center space-x-2"
-                aria-label="Print character sheet"
-            >
-                <PrintIcon />
-                <span>Print</span>
-            </button>
+            <div className="flex space-x-2">
+                 <button 
+                    onClick={handleExport}
+                    className="font-title bg-gray-700 text-amber-300 py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors duration-300 flex items-center space-x-2"
+                    aria-label="Export character as MDX file"
+                >
+                    <DownloadIcon />
+                    <span>Export MDX</span>
+                </button>
+                <button 
+                    onClick={handlePrint}
+                    className="font-title bg-gray-700 text-amber-300 py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors duration-300 flex items-center space-x-2"
+                    aria-label="Print character sheet"
+                >
+                    <PrintIcon />
+                    <span>Print</span>
+                </button>
+            </div>
         </div>
         
       <div className="flex flex-col md:flex-row gap-6 text-center md:text-left items-center mb-4 border-b-2 border-amber-900/50 pb-4 print-border-gray">

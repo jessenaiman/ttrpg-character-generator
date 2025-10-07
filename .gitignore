@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+/generated/prisma
+
+
+#Ignore vscode AI rules
+.github/instructions/codacy.instructions.md

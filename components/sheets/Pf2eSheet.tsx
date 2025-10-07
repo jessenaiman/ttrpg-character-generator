@@ -48,7 +48,11 @@ const PF2eSheet: React.FC<Pf2eSheetProps> = ({ character: char }) => {
                     </ul>
                 </SheetSection>
 
-                <SheetSection title="Appearance"><p className="text-gray-300 text-sm leading-relaxed print-text-black">{char.appearance}</p></SheetSection>
+                <SheetSection title="Appearance">
+                    <ul className="space-y-2 text-sm">
+                        {char.appearance.map((item, i) => <IconListItem key={i} icon={<ScrollIcon/>}>{item}</IconListItem>)}
+                    </ul>
+                </SheetSection>
                 
                 <SheetSection title="Personality">
                     <ul className="space-y-2 text-sm">
